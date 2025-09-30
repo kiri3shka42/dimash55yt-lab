@@ -1,2 +1,101 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Переходим на рабочий стол (или куда хочешь)
+cd $env:USERPROFILE\Desktop
+
+# Создаём папку проекта и подпапку images
+mkdir dimash55yt-site
+cd dimash55yt-site
+mkdir images
+
+# Создаём index.html
+@"
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Dimash55YT App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Привет, Dimash55YT!</h1>
+    <p>Добро пожаловать на интерактивную веб-страницу!</p>
+
+    <button onclick="greet()">Поприветствовать снова</button>
+    <button onclick="showTime()">Показать текущее время</button>
+    <button onclick="sayBye()">Выход</button>
+
+    <p id="output"></p>
+
+    <div class="channel">
+        <p>Поддержать канал:</p>
+        <img src="images/avatar.jpg" alt="Dimash55YT">
+        <p>
+            <a id="channelLink" href="https://www.youtube.com/@Dimash55YT" target="_blank" rel="noopener noreferrer">
+                Канал Dimash55YT на YouTube
+            </a>
+        </p>
+
+        <div class="video-embed">
+            <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/Gol7lI5ghOY"
+                    title="Человек Паук против Таноса GTA 5 мод"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+"@ | Out-File index.html -Encoding UTF8
+
+# Создаём style.css
+@"
+body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    margin-top: 40px; 
+}
+button { 
+    margin: 10px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+}
+#output { 
+    margin-top: 20px; 
+    font-weight: bold; 
+    min-height: 1.5em; 
+}
+.channel { 
+    margin-top: 30px; 
+}
+.video-embed { 
+    margin-top: 10px; 
+    max-width: 560px; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+.channel img { 
+    width: 150px; 
+    border-radius: 50%; 
+    margin-bottom: 10px; 
+}
+"@ | Out-File style.css -Encoding UTF8
+
+# Создаём script.js
+@"
+function greet() {
+    document.getElementById('output').innerText = 'Привет еще раз, Dimash55YT! 😎';
+}
+
+function showTime() {
+    const now = new Date();
+    document.getElementById('output').innerText = 'Сейчас: ' + now.toLocaleString();
+}
+
+function sayBye() {
+    document.getElementById('output').innerText = 'Пока! До встречи!';
+}
+"@ | Out-File script.js -Encoding UTF8
+
